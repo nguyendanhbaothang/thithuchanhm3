@@ -5,6 +5,7 @@
 <a class="btn btn-success" href="{{route('chitieu.create')}}">Thêm chi tiêu </a>
 <table class="table">
     <div class="col-6">
+
     </div>
     <thead>
       <tr>
@@ -17,13 +18,14 @@
       </tr>
     </thead>
     <tbody id="myTable">
+        @php $totalAll = 0 @endphp
         @foreach ($chitieu as $key => $team)
         <tr>
             <th scope="row">{{$key+1}}</th>
             <td>{{ $team->danhmuc }}</td>
-            <td>{{$team->ngay }}</td>
-            <td>{{$team->price }}</td>
-            <td>{{$team->note }}</td>
+            <td>{{$team->ngay}}</td>
+            <td>{{number_format($team->price) }} VNĐ</td>
+            <td>{{$team->note }} </td>
             <td>
                     <form action="{{route('chitieu.destroy',[$team->id])}}" method="post">
                         @method('DELETE')
@@ -33,7 +35,11 @@
                     </form>
             </td>
           </tr>
-@endforeach
+          @php $totalAll += $team->price @endphp
+                        @endforeach
+                        <h3 style="color: red">tổng tiền {{number_format($totalAll)}} VND</h3>
+
+
 
 
     </tbody>
