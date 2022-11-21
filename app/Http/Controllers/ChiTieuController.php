@@ -98,10 +98,17 @@ class ChiTieuController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'price' => 'min:4'
+            'danhmuc' => 'required',
+            'ngay' => 'required',
+            'price' => 'required|min:4',
+            'note' => 'required'
         ],
             [
-                'price.min'=>'Lớn hơn :min'
+                'danhmuc.required'=>'Không được để trống',
+                'ngay.required'=>'Không được để trống',
+                'price.required'=>'Không được để trống',
+                'price.min'=>'Lớn hơn :min',
+                'note.required'=>'Không được để trống'
 
             ]
     );
